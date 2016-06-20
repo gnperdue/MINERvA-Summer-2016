@@ -2,7 +2,7 @@ export CUDA_VISIBLE_DEVICES=`cat /tmp/pbs.prologue.$PBS_JOBID`
 
 export PATH=/usr/local/Python-2.7.8/bin:$PATH
 export PATH=/usr/local/protobuf/bin:$PATH
-export PATH=/usr/local/caffe/bin:$PATH
+export PATH=/usr/local/caffe.latest/bin:$PATH
 export PATH=/usr/local/cuda/bin:$PATH
 
 export LD_LIBRARY_PATH=/usr/local/gcc-4.9.1/lib:$LD_LIBRARY_PATH
