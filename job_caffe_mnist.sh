@@ -19,7 +19,7 @@ echo "Job ${PBS_JOBNAME} submitted from ${PBS_O_HOST} started "`date`" jobid ${P
 cat ${PBS_NODEFILE}
 
 cd $HOME
-source caffe_gpu_setup.sh
+source MINERvA-Summer-2016/setup_scripts/caffe_setup.sh
 
 cd ${PBS_O_WORKDIR}
 echo "PBS_O_WORKDIR is `pwd`"
@@ -36,8 +36,8 @@ echo "PBS_O_WORKDIR is `pwd`"
 # to the file server before exiting your script. The /scratch area on the
 # workers is wiped clean between jobs.
 
-LMDBDIR=/phihome/perdue/caffe/examples/mnist
-NETWORKDIR=/phihome/perdue/caffe/examples/mnist
+LMDBDIR=/phihome/$USER/caffe/examples/mnist
+NETWORKDIR=/phihome/$USER/caffe/examples/mnist
 
 echo " &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& "
 echo "                     Train                             "
