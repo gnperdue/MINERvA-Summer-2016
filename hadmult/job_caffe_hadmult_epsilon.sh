@@ -2,8 +2,7 @@
 #PBS -S /bin/bash
 #PBS -N caffe-hadmult_epsilon
 #PBS -j oe
-DAT=`date +%s`
-#PBS -o ./out_job_caffe_hadmult_epsilon_${DAT}.txt
+#PBS -o ./out_job_caffe_hadmult_epsilon.txt
 #PBS -l nodes=1:gpu,walltime=24:00:00
 #PBS -A minervaG
 #PBS -q gpu
