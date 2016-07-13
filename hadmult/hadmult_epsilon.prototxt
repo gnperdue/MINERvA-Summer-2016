@@ -17,7 +17,7 @@ layer {
   top: "hits-x"
   top: "hits-u"
   top: "hits-v"
-  top: "segments"
+  top: "n-hadmultmeas"
 }
 
 #testing
@@ -35,7 +35,7 @@ layer {
   top: "hits-x"
   top: "hits-u"
   top: "hits-v"
-  top: "segments"
+  top: "n-hadmultmeas"
 }
 
 #x branch
@@ -627,7 +627,7 @@ layer {
   bottom: "dl_xuv"
   top: "output"
   inner_product_param {
-    num_output: 11
+    num_output: 6
     weight_filler {
       type: "xavier" 
     }
@@ -651,7 +651,7 @@ layer {
   name: "accuracy"
   type: "Accuracy"
   bottom: "output"
-  bottom: "segments"
+  bottom: "n-hadmultmeas"
   top: "accuracy"
   include {
     phase: TEST
