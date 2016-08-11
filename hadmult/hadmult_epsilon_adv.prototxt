@@ -14,14 +14,15 @@ layer {
     phase: TRAIN
   }
   hdf5_data_param {
-    source: "/phihome/sohini/caffe/hadmult/hadmult_epsilon.trainlist"
-    batch_size: 100
+    source: "/lustre/atlas/proj-shared/hep105/sohini/hadmult/hadmult_epsilon_source.trainlist"
+    batch_size: 50
   }
   top: "hits-x_me1Amc"
   top: "hits-u_me1Amc"
   top: "hits-v_me1Amc"
-  top: "n-hadmultmeas_me1Amc"
+  top: "n-hadmultmeas"
 }
+
 
 layer {
   name: "source_domain_labels"
@@ -32,7 +33,7 @@ layer {
       type: "constant"
       value: 0
     }
-    num: 100 #make same as batch size
+    num: 50 #make same as batch size
     channels: 1
     height: 1
     width: 1
@@ -41,7 +42,7 @@ layer {
 }
 
 
-# ---------------------- Source ------------------------------
+# --------------------- Target  ------------------------------
 #Training
 
 layer {
@@ -51,12 +52,12 @@ layer {
     phase: TRAIN
   }
   hdf5_data_param {
-    source: "/phihome/sohini/caffe/hadmult/hadmult_epsilon.trainlist"
-    batch_size: 100
+    source: "/lustre/atlas/proj-shared/hep105/sohini/hadmult/hadmult_epsilon_target.trainlist"
+    batch_size: 50
   }
-  top: "hits-x_minerva1"
-  top: "hits-u_minerva1"
-  top: "hits-v_minerva1"
+  top: "hits-x_minerva1mc"
+  top: "hits-u_minerva1mc"
+  top: "hits-v_minerva1mc"
 }
 
 layer {
@@ -68,7 +69,7 @@ layer {
       type: "constant"
       value: 0
     }
-    num: 100 #make same as batch size
+    num: 50 #make same as batch size
     channels: 1
     height: 1
     width: 1
@@ -86,13 +87,13 @@ layer {
     phase: TEST
   }
   hdf5_data_param {
-    source: "/phihome/sohini/caffe/hadmult/hadmult_epsilon.testlist"
-    batch_size: 100
+    source: "/lustre/atlas/proj-shared/hep105/sohini/hadmult/hadmult_epsilon_target.testlist"
+    batch_size: 50
   }
-  top: "hits-x_minerva1"
-  top: "hits-u_minerva1"
-  top: "hits-v_minerva1"
-  top: "n-hadmultmeas_minerva1"
+  top: "hits-x"
+  top: "hits-u"
+  top: "hits-v"
+  top: "n-hadmultmeas"
 }
 
 layer {
@@ -104,7 +105,7 @@ layer {
       type: "constant"
       value: 1
     }
-    num: 100
+    num: 50
     channels: 1
     height: 1
     width: 1
@@ -118,10 +119,10 @@ layer {
   name: "concat_data_x"
   type: "Concat"
   bottom: "hits-x_me1Amc"
-  bottom: "hits-x_minerva1"
-  top: "concat_data_x"
+  bottom: "hits-x_minerva1mc"
+  top: "hits-x"
   concat_param {
-    concat_dim: 0
+    axis: 0 #concat_dim -> axis
   }
   include: { phase: TRAIN }
 }
@@ -130,10 +131,10 @@ layer {
   name: "concat_data_u"
   type: "Concat"
   bottom: "hits-u_me1Amc"
-  bottom: "hits-u_minerva1"
-  top: "concat_data_u"
+  bottom: "hits-u_minerva1mc"
+  top: "hits-u"
   concat_param {
-    concat_dim: 0
+    axis: 0
   }
   include: { phase: TRAIN }
 }
@@ -142,10 +143,10 @@ layer {
   name: "concat_data_v"
   type: "Concat"
   bottom: "hits-v_me1Amc"
-  bottom: "hits-v_minerva1"
-  top: "concat_data_v"
+  bottom: "hits-v_minerva1mc"
+  top: "hits-v"
   concat_param {
-    concat_dim: 0
+    axis: 0
   }
   include: { phase: TRAIN }
 }
@@ -157,7 +158,7 @@ layer {
   bottom: "target_domain_labels"
   top: "dc_labels"
   concat_param {
-    concat_dim: 0
+    axis: 0
   }
   include: { phase: TRAIN }
 }
@@ -168,7 +169,7 @@ layer {
 layer {
   name: "conv_x1"
   type: "Convolution"
-  bottom: "concat_data_x"
+  bottom: "hits-x"
   top: "conv_x1"
   convolution_param {
     num_output: 12 #num filters
@@ -347,7 +348,7 @@ layer {
 layer {
   name: "conv_u1"
   type: "Convolution"
-  bottom: "concat_data_u"
+  bottom: "hits-u"
   top: "conv_u1"
   convolution_param {
     num_output: 12
@@ -526,7 +527,7 @@ layer {
 layer {
   name: "conv_v1"
   type: "Convolution"
-  bottom: "concat_data_v"
+  bottom: "hits-v"
   top: "conv_v1"
   convolution_param {
     num_output: 12
@@ -752,7 +753,7 @@ layer {
   name: "bottleneck"
   type: "InnerProduct"
   bottom: "dl_xuv"
-  top: "bottlenec"
+  top: "bottleneck"
   inner_product_param {
     num_output: 6
     weight_filler {
@@ -825,7 +826,7 @@ layer {
   name: "lp_accuracy"
   type: "Accuracy"
   bottom: "lp_fc8"
-  bottom: "n-hadmultmeas_me1Amc" #not sure if this is right
+  bottom: "n-hadmultmeas" 
   top: "lp_accuracy"
   include: { phase: TEST }
 }
@@ -833,7 +834,7 @@ layer {
   name: "lp_loss"
   type: "SoftmaxWithLoss"
   bottom: "lp_fc8"
-  bottom: "n-hadmultmeas_me1Amc"
+  bottom: "n-hadmultmeas"
   top: "lp_loss"
 }
 
@@ -962,3 +963,4 @@ layer {
   top: "dc_loss"
   loss_weight: 0.1
 }
+
