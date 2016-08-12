@@ -17,9 +17,9 @@ layer {
     source: "/lustre/atlas/proj-shared/hep105/sohini/vertex/vertex_epsilon_source.trainlist"
     batch_size: 50
   }
-  top: "hits-x_me1Amc"
-  top: "hits-u_me1Amc"
-  top: "hits-v_me1Amc"
+  top: "hits-x_me1Bmc"
+  top: "hits-u_me1Bmc"
+  top: "hits-v_me1Bmc"
   top: "segments"
 }
 
@@ -55,7 +55,7 @@ layer {
     source: "/lustre/atlas/proj-shared/hep105/sohini/vertex/vertex_epsilon_target.trainlist"
     batch_size: 50
   }
-  top: "hits-x_minerva1mc"
+  top: "hits-x_me1Bdata"
   top: "hits-u_minerva1mc"
   top: "hits-v_minerva1mc"
 }
@@ -376,7 +376,7 @@ layer {
     num_output: 12
     pad: 0
     kernel_h: 8
-    kernel_w: 3
+    kernel_w: 5
     stride: 1
     weight_filler {
       type: "xavier"
@@ -576,7 +576,7 @@ layer {
     num_output: 12
     pad: 0
     kernel_h: 8
-    kernel_w: 3
+    kernel_w: 5
     stride: 1
     weight_filler {
       type: "xavier"
