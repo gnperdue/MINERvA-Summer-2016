@@ -11,7 +11,7 @@ layer {
     phase: TRAIN
   }
   hdf5_data_param {
-    source: "/phihome/sohini/caffe/hadmult/hadmult_epsilon.trainlist"
+    source: "/lustre/atlas/proj-shared/hep105/sohini/vertex/vertex_epsilon.trainlist"
     batch_size: 100
   }
   top: "hits-x"
@@ -29,7 +29,7 @@ layer {
     phase: TEST
   }
   hdf5_data_param {
-    source: "/phihome/sohini/caffe/hadmult/hadmult_epsilon.testlist"
+    source: "/lustre/atlas/proj-shared/hep105/sohini/vertex/vertex_epsilon.testlist"
     batch_size: 100
   }
   top: "hits-x"
@@ -687,7 +687,6 @@ layer {
   }
 }
 
-
 layer {
   name: "output"
   type: "InnerProduct"
@@ -708,7 +707,7 @@ layer {
   name: "accuracy"
   type: "Accuracy"
   bottom: "output"
-  bottom: "n-hadmultmeas"
+  bottom: "segments"
   top: "accuracy"
   include {
     phase: TEST
