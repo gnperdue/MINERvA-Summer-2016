@@ -1,4 +1,4 @@
-#modeled after epsilon_inv_2016-05-30T07.39.00.897234.prototxt with domain adversarial training
+#modeled after minerva_triamese_epsilon.py  with domain adversarial training
 
 name: "vertex_epsilon_xuv_adv"
 
