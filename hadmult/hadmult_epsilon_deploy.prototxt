@@ -2,26 +2,24 @@
 
 name: "hadmult_epsilon_xuv"
 
+
+#testing
+
 layer {
-  name: "hits-x"
-  type: "Input"
+  name: "data"
+  type: "HDF5Data"
+  include {
+    phase: TEST
+  }
+  hdf5_data_param {
+    source: "/phihome/sohini/caffe/hadmult/hadmult_epsilon.testlist"
+    batch_size: 1
+  }
   top: "hits-x"
-  input_param { shape: { dim: 1 dim: 3 dim: 72 dim: 127 } }
-}
-
-layer {
-  name: "hits-u"
-  type: "Input"
   top: "hits-u"
-  input_param { shape: { dim: 1 dim: 3 dim: 36 dim: 127 } }
+  top: "hits-v"
 }
 
-layer {
-  name: "hits-v"
-  type: "Input"
-  top: "hits-v"
-  input_param { shape: { dim: 1 dim: 3 dim: 36 dim: 127 } }
-}
 
 #x branch
 
@@ -622,15 +620,6 @@ layer {
   }
 }
 
-layer {
-  name: "drop_output"
-  type: "Dropout"
-  bottom: "output"
-  top: "output"
-  dropout_param {
-    dropout_ratio: 0.5
-  }
-}
 
 layer {
   name: "prob"
