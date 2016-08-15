@@ -652,6 +652,6 @@ layer {
   name: "loss"
   type: "SoftmaxWithLoss"
   bottom: "output"
-  bottom: "segments"
+  bottom: "n-hadmultmeas"
   top: "loss"
 }
