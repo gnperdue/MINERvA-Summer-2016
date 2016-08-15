@@ -55,7 +55,7 @@ layer {
     source: "/lustre/atlas/proj-shared/hep105/sohini/vertex/vertex_epsilon_target.trainlist"
     batch_size: 50
   }
-  top: "hits-x_me1Bdata"
+  top: "hits-x_minerva1mc"
   top: "hits-u_minerva1mc"
   top: "hits-v_minerva1mc"
 }
