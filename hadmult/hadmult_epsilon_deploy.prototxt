@@ -18,6 +18,8 @@ layer {
   top: "hits-x"
   top: "hits-u"
   top: "hits-v"
+  top: "n-hadmultmeas" #only for debugging/labeled test sets
+  top: "eventids"
 }
 
 
