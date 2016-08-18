@@ -3,12 +3,13 @@
 import sys
 sys.path.insert(0, '/opt/caffe/python')
 import caffe
-import numpy as np
+# import numpy as np
 
-#Example usage:
-#python classify.py <path to prototxt> <path to model> <test iter> <test batch size> <output file>
+# Example usage:
+# python classify.py <path to prototxt> <path to model> <test iter> \
+#   <test batch size> <output file>
 
-#Run parameters
+# Run parameters
 if len(sys.argv) == 6:
     prototxt = sys.argv[1]
     model = sys.argv[2]
@@ -25,16 +26,17 @@ caffe.set_mode_cpu()
 net = caffe.Net(prototxt, model, caffe.TEST)
 
 with open(outfile, "w") as f:
-    for i in xrange(test_iter):
+    for i in xrange(iter):
         net.forward()
         predictions = net.blobs['output'].data.argmax(1)
         predvecs = net.blobs['output'].data
         eventids = net.blobs['eventids'].data
-        for j in xrange(test_batch_size):
+        for j in xrange(batch_size):
             prediction = predictions[j]
-            predvec = predvec[j]
+            predvec = predvecs[j]
             eventid = eventids[j]
-            f.write(eventid+"\t"+prediction+"\t"+predvec+"\n")
+            f.write(str(eventid) + "\t" + str(prediction) +
+                    "\t" + str(predvec)+"\n")
 f.close()
 
 
