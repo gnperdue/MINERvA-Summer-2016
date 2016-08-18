@@ -1,4 +1,4 @@
-#classify all events in testing .hdf5, dump predictions to .txt
+#produce confusion matrix
 
 import sys
 sys.path.insert(0, '/opt/caffe/python')
@@ -31,11 +31,11 @@ caffe.set_mode_cpu()
 # Import net
 net = caffe.Net(prototxt, model, caffe.TEST)
 
-for i in xrange(test_iter):
+for i in xrange(iter):
     net.forward()
     predictions = net.blobs['output'].data.argmax(1)
     actuals = net.blobs[label].data
-    for j in xrange(test_batch_size):
+    for j in xrange(batch_size):
         confusionMatrix[predictions[j],actuals[j]] +=1
 
 print confusionMatrix
