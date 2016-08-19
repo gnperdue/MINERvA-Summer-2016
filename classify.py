@@ -20,10 +20,6 @@ if len(sys.argv) == 7:
 else:
     sys.exit("Incorrect number of arguments")
     
-if label=="segments":
-    confusionMatrix = np.zeros([11,11])
-else:
-    confusionMatrix = np.zeros([6,6]) #change to 6x6 for hadmult
     
 # Initialize Network
 caffe.set_mode_cpu()
@@ -42,8 +38,7 @@ with open(outfile, "w") as f:
             prediction = predictions[j]
             predvec = predvecs[j]
             eventid = eventids[j]
-            line = str(eventid) + "\t" + str(prediction) +
-                    "\t" + str(actual) + "\t" str(predvec)+"\n"
+            line = str(eventid) + "\t" + str(prediction) +"\t" + str(actual) + "\t" + str(predvec)+"\n"
             print line
             f.write(line)
 f.close()
