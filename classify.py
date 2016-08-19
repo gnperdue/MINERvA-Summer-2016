@@ -44,6 +44,7 @@ with open(outfile, "w") as f:
             eventid = eventids[j]
             line = str(eventid) + "\t" + str(prediction) +
                     "\t" + str(actual) + "\t" str(predvec)+"\n"
+            print line
             f.write(line)
 f.close()
 
