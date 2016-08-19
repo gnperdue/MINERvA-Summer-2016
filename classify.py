@@ -42,8 +42,9 @@ with open(outfile, "w") as f:
             prediction = predictions[j]
             predvec = predvecs[j]
             eventid = eventids[j]
-            f.write(str(eventid) + "\t" + str(prediction) +
-                    "\t" + str(actual) + "\t" str(predvec)+"\n")
+            line = str(eventid) + "\t" + str(prediction) +
+                    "\t" + str(actual) + "\t" str(predvec)+"\n"
+            f.write(line)
 f.close()
 
 
