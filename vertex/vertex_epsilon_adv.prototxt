@@ -77,17 +77,16 @@ layer {
   include: { phase: TRAIN }
 }
 
-#Testing
 
-#????
+#Validation
 layer {
-  name: "target_data" 
+  name: "validation_data" 
   type: "HDF5Data"
   include {
     phase: TEST
   }
   hdf5_data_param {
-    source: "/lustre/atlas/proj-shared/hep105/sohini/vertex/vertex_epsilon_target.testlist"
+    source: "/lustre/atlas/proj-shared/hep105/sohini/vertex/vertex_epsilon_source.vallist"
     batch_size: 50
   }
   top: "hits-x"
@@ -97,13 +96,13 @@ layer {
 }
 
 layer {
-  name: "target_domain_labels"
+  name: "val_domain_labels"
   type: "DummyData"
   top: "dc_labels"
   dummy_data_param {
     data_filler {
       type: "constant"
-      value: 1
+      value: 0 #b/c using source events for validation
     }
     num: 50
     channels: 1
