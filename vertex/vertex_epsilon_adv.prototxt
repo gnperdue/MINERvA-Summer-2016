@@ -67,7 +67,7 @@ layer {
   dummy_data_param {
     data_filler {
       type: "constant"
-      value: 0
+      value: 1
     }
     num: 50 #make same as batch size
     channels: 1
