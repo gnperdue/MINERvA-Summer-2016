@@ -1,4 +1,5 @@
 # MINERvA-Summer-2016
+Building neural networks for particle physics as part of the Summer 2016 Machine Learning Internship at Fermilab
 ## Hadmult
 Caffe neural networks with and without domain adversarial training for classifying the number of hadrons produced in an event
 ## Setup_scripts
