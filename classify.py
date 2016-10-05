@@ -1,4 +1,5 @@
 #classify all events in testing .hdf5, dump predictions to .txt
+#use for noDANN
 
 import sys
 sys.path.insert(0, '/opt/caffe/python')
